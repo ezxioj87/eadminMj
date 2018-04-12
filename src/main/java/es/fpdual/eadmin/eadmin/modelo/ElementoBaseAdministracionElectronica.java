@@ -31,7 +31,7 @@ public abstract  class ElementoBaseAdministracionElectronica {
 		return fechaCreacion;
 	}
 	
-	public Date getFechaUltimaActualizacion() {
+	public Date getFechaUltimaModificacion() {
 		return fechaUltimaActualizacion;
 	}
 

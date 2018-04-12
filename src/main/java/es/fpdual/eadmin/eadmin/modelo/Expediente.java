@@ -43,7 +43,7 @@ public class Expediente extends ElementoBaseAdministracionElectronica{
 			return expediente.getCodigo().equals(this.codigo) 
 						&& expediente.getNombre().equals(this.nombre)
 						&& expediente.getFechaCreacion().equals(this.fechaCreacion)
-						&& expediente.getFechaUltimaActualizacion().equals(this.fechaUltimaActualizacion)
+						&& expediente.getFechaUltimaModificacion().equals(this.fechaUltimaActualizacion)
 						&& expediente.getFechaArchivado().equals(this.fechaArchivado)
 						&& expediente.getPublico().equals(this.publico) 
 						&& expediente.getEstado().equals(this.estado);
