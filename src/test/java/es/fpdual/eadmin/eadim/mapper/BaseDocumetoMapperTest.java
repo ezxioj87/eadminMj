@@ -52,9 +52,13 @@ public abstract class BaseDocumetoMapperTest {
 		//Entrenamiento
 		mapper.insertarDocumento(doc);
 		//Ejecucion
-		final int resultado=mapper.modificarDocumento(doc);
+		final int resultado=mapper.modificarDocumento(documentoActualizado);
 		//Verificacion
-		assertThat(documentoActualizado,is(doc));
+		assertThat(resultado,is(1));
+		
+		Documento documentoModificado = mapper.selectDocumento(1);
+		
+		assertThat(documentoModificado,is(documentoActualizado));
 		
 	}
 	

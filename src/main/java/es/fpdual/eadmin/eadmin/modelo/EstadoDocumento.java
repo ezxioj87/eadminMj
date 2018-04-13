@@ -16,8 +16,11 @@ public enum EstadoDocumento {
 		return codigo;
 	}
 	
-//	public static EstadoDocumento obenenerPorCodigo(Integer codigo) {
-//		return Arrays.asList(EstadoDocumento.values()).stream().filter(codigoLista -> codigoLista.getCodigo()).findFirst().orElse(null);
-//	}
+	public static EstadoDocumento obtenerPorCodigo(Integer codigo) {
+
+		return (EstadoDocumento) Arrays.asList(EstadoDocumento.values()).stream()
+				.filter(codigoLista -> ((EstadoDocumento) codigoLista)
+				.getCodigo() == codigo.intValue()).findAny().orElse(null);
+}
 
 }

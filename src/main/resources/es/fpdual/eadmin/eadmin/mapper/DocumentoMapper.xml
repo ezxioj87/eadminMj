@@ -23,16 +23,13 @@
 	<update id="modificarDocumento">
 		UPDATE ELEMENTO
 		SET
-		nombre= 'documento mod',
+		nombre= #{documento.nombre},
 		fechaCreacion= #{documento.fechaCreacion},
 		fechaUltimaModificacion= #{documento.fechaUltimaModificacion},
 		esPublico= #{documento.publico},
 		estadoDocumento= #{documento.estado.codigo},
 		tipo=1
 		where codigo = #{documento.codigo}
-
-
-
 
 	</update>
 
@@ -50,7 +47,7 @@
 			<arg column="fechaCreacion" javaType="Date" />
 			<arg column="fechaUltimaModificacion" javaType="Date" />
 			<arg column="esPublico" javaType="boolean" />
-			<arg column="estadoDocumento" javaType="int" />
+			<arg column="estadoDocumento" javaType="es.fpdual.eadmin.eadmin.modelo.EstadoDocumento" />
 		</constructor>
 
 
