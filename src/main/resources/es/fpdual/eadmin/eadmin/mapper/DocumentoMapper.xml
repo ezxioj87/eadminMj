@@ -2,49 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="es.fpdual.eadmin.eadmin.mapper.DocumentoMapper">
 	<insert id="insertarDocumento">
-	INSERT INTO ELEMENTO (
-	codigo,
-	nombre,
-	fechaCreacion,
-	fechaUltimaModificacion,
-	esPublico,
-	estadoDocumento,
-	tipo) 
-	values(
-	#{documento.codigo},
-	#{documento.nombre},
-	#{documento.fechaCreacion},
-	#{documento.fechaUltimaModificacion},
-	#{documento.publico},#{documento.estado.codigo},
-	1
-	)
+		INSERT INTO ELEMENTO (
+		codigo,
+		nombre,
+		fechaCreacion,
+		fechaUltimaModificacion,
+		esPublico,
+		estadoDocumento,
+		tipo)
+		values(
+		#{documento.codigo},
+		#{documento.nombre},
+		#{documento.fechaCreacion},
+		#{documento.fechaUltimaModificacion},
+		#{documento.publico},#{documento.estado.codigo},
+		1
+		)
 	</insert>
-	
+
 	<update id="modificarDocumento">
-	UPDATE ELEMENTO
-	SET 
-	nombre= #{documento.nombre},
-	fechaCreacion= #{documento.fechaCreacion},
-	fechaUltimaModificacion= #{documento.fechaUltimaModificacion},
-	esPublico= #{documento.publico},
-	estadoDocumento= #{documento.estado.codigo},
-	tipo=1 
-	where codigo = #{documento.codigo}
-	
-	
-	
-	
+		UPDATE ELEMENTO
+		SET
+		nombre= 'documento mod',
+		fechaCreacion= #{documento.fechaCreacion},
+		fechaUltimaModificacion= #{documento.fechaUltimaModificacion},
+		esPublico= #{documento.publico},
+		estadoDocumento= #{documento.estado.codigo},
+		tipo=1
+		where codigo = #{documento.codigo}
+
+
+
+
 	</update>
-	
+
 	<delete id="eliminarDocumento">
-	DELETE FROM ELEMENTO where codigo=#{codigo}
+		DELETE FROM ELEMENTO where codigo=#{codigo}
 	</delete>
-	
-	<select id="selectDocumento">
-	SELECT codigo,nombre,fechaCreacion,fechaUltimaModificacion,esPublico,estadoDocumento,tipo
-	from ELEMENTO
-	where codigo = #{documento.codigo};
+
+
+	<resultMap type="es.fpdual.eadmin.eadmin.modelo.Documento"
+		id="map">
+
+		<constructor>
+			<idArg column="codigo" javaType="int" />
+			<arg column="nombre" javaType="String" />
+			<arg column="fechaCreacion" javaType="Date" />
+			<arg column="fechaUltimaModificacion" javaType="Date" />
+			<arg column="esPublico" javaType="boolean" />
+			<arg column="estadoDocumento" javaType="int" />
+		</constructor>
+
+
+
+
+	</resultMap>
+
+	<select id="selectDocumento" resultMap="map">
+		SELECT
+		codigo,nombre,fechaCreacion,fechaUltimaModificacion,esPublico,estadoDocumento,tipo
+		from ELEMENTO
+		where codigo = #{codigo};
 	</select>
-	
+
 
 </mapper>

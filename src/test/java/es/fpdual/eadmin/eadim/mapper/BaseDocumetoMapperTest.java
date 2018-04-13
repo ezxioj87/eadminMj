@@ -25,7 +25,7 @@ public abstract class BaseDocumetoMapperTest {
 	
 	@Before
 	public void voidinicializarEnCadaTest() {
-		doc = new Documento(1,"Documento 1",Utilidades.asDate(LocalDate.of(2015, 1, 2)),
+		doc = new Documento(1,"Documento 1",Utilidades.asDate(LocalDate.of(2015, 1, 1)),
 				Utilidades.asDate(LocalDate.of(2015, 1, 2)),true,EstadoDocumento.ACTIVO);
 	}
 	
@@ -47,13 +47,14 @@ public abstract class BaseDocumetoMapperTest {
 	@Test
 	public void deberiaModificarUnDocumento() throws Exception {
 		//Decalaracion
-		
+		Documento documentoActualizado = new Documento(1,"documento mod",Utilidades.asDate(LocalDate.of(2015, 2, 1)),
+				Utilidades.asDate(LocalDate.of(2015, 2, 2)),true,EstadoDocumento.APROBADO);
 		//Entrenamiento
 		mapper.insertarDocumento(doc);
 		//Ejecucion
 		final int resultado=mapper.modificarDocumento(doc);
 		//Verificacion
-		assertThat(resultado,is(1));
+		assertThat(documentoActualizado,is(doc));
 		
 	}
 	
@@ -75,17 +76,15 @@ public abstract class BaseDocumetoMapperTest {
 	@Test
 	public void deberiaSelecionarUnDocumento() throws Exception {
 		//Decalaracion
-		final Documento documentoActualizado=doc = new Documento(1,"Documento 1",Utilidades.asDate(LocalDate.of(2015, 1, 2)),
-				Utilidades.asDate(LocalDate.of(2015, 1, 2)),true,EstadoDocumento.ACTIVO);
+		Documento docume;
+		
 		//Entrenamiento
 		mapper.insertarDocumento(doc);
 		//Ejecucion
-
-		final Documento documentoModificado=mapper.selectDocumento(doc);
+		docume = mapper.selectDocumento(1);
 		//Verificacion
-		assertThat(resultado,is(1));
-		assertTaht(documentoModificado,is(documentoActualizado));
-		
+		assertThat(docume,is(doc));
+	
 	}
 
 }

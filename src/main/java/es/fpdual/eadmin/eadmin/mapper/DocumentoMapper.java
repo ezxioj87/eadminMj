@@ -12,6 +12,6 @@ public interface DocumentoMapper {
 	
 	int modificarDocumento(@Param("documento") Documento documento);
 	
-	Documento selectDocumento(@Param("doc")Documento doc );
+	Documento selectDocumento(@Param("codigo")int codigo );
 
 }
