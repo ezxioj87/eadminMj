@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="es.fpdual.eadmin.eadmin.mapper.DocumentoMapper">
 	<insert id="insertarDocumento">
+<!-- 	<selectKey keyProperty="id" resulType="int" order="BEFORE"> -->
+<!-- 	<include refid="seleccionarCodigoMaximo"/>; -->
+<!-- 	</selectKey> -->
 		INSERT INTO ELEMENTO (
 		codigo,
 		nombre,
@@ -54,6 +57,7 @@
 
 
 	</resultMap>
+	
 
 	<select id="selectDocumento" resultMap="map">
 		SELECT
@@ -67,6 +71,11 @@
 	codigo,nombre,fechaCreacion,fechaUltimaModificacion,esPublico,estadoDocumento,tipo
 	from ELEMENTO;
 	</select>
-
+	
+	<select id="seleccionarCodigoMaximo" resultType="Integer">
+	SELECT	isNull(max(codigo),1) +1
+	FROM ELEMENTO;
+	
+	</select>
 
 </mapper>

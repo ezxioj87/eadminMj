@@ -17,5 +17,7 @@ public interface DocumentoMapper {
 	Documento selectDocumento(@Param("codigo")int codigo );
 	
 	List<Documento> selectTodosLosDocumentos();
+	
+	int seleccionarCodigoMaximo();
 
 }

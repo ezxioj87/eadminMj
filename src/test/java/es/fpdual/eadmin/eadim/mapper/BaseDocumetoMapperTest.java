@@ -25,7 +25,7 @@ public abstract class BaseDocumetoMapperTest {
 	
 	@Before
 	public void voidinicializarEnCadaTest() {
-		doc = new Documento(1,"Documento 1",Utilidades.asDate(LocalDate.of(2015, 1, 1)),
+		doc = new Documento(-1,"Documento 1",Utilidades.asDate(LocalDate.of(2015, 1, 1)),
 				Utilidades.asDate(LocalDate.of(2015, 1, 2)),true,EstadoDocumento.ACTIVO);
 	}
 	
@@ -47,7 +47,7 @@ public abstract class BaseDocumetoMapperTest {
 	@Test
 	public void deberiaModificarUnDocumento() throws Exception {
 		//Decalaracion
-		Documento documentoActualizado = new Documento(1,"documento mod",Utilidades.asDate(LocalDate.of(2015, 2, 1)),
+		Documento documentoActualizado = new Documento(-1,"documento mod",Utilidades.asDate(LocalDate.of(2015, 2, 1)),
 				Utilidades.asDate(LocalDate.of(2015, 2, 2)),true,EstadoDocumento.APROBADO);
 		//Entrenamiento
 		mapper.insertarDocumento(doc);
@@ -56,7 +56,7 @@ public abstract class BaseDocumetoMapperTest {
 		//Verificacion
 		assertThat(resultado,is(1));
 		
-		Documento documentoModificado = mapper.selectDocumento(1);
+		Documento documentoModificado = mapper.selectDocumento(-1);
 		
 		assertThat(documentoModificado,is(documentoActualizado));
 		
@@ -71,7 +71,7 @@ public abstract class BaseDocumetoMapperTest {
 		mapper.insertarDocumento(doc);
 		//Ejecucion
 		
-		final int resultado=mapper.eliminarDocumento(1);
+		final int resultado=mapper.eliminarDocumento(-1);
 		//Verificacion
 		assertThat(resultado,is(1));
 		
@@ -85,7 +85,7 @@ public abstract class BaseDocumetoMapperTest {
 		//Entrenamiento
 		mapper.insertarDocumento(doc);
 		//Ejecucion
-		docume = mapper.selectDocumento(1);
+		docume = mapper.selectDocumento(-1);
 		//Verificacion
 		assertThat(docume,is(doc));
 	
@@ -97,15 +97,42 @@ public abstract class BaseDocumetoMapperTest {
 		List<Documento> documentos;
 		
 		//Entrenamiento
-		Documento doc1 = new Documento(2,"documento 2",Utilidades.asDate(LocalDate.of(2015, 2, 1)),
+		Documento doc1 = new Documento(-2,"documento 2",Utilidades.asDate(LocalDate.of(2015, 2, 1)),
 				Utilidades.asDate(LocalDate.of(2015, 2, 2)),true,EstadoDocumento.ACTIVO);
 		mapper.insertarDocumento(doc);
 		mapper.insertarDocumento(doc1);
 		//Ejecucion
 		documentos = mapper.selectTodosLosDocumentos();
 		//Verificacion
-		assertEquals(documentos,hasSize(2));
+		assertThat(documentos,hasSize(2));
 		assertThat(documentos, hasItems(this.doc,doc1));
+	
+	}
+	
+	@Test
+	public void deberiaSelecionarCodigoMaximo() throws Exception {
+		//Decalaracion
+		int docume;
+		
+		//Entrenamiento
+		//Ejecucion
+		docume = mapper.seleccionarCodigoMaximo();
+		//Verificacion
+		assertEquals(docume,2);
+	
+	}
+	
+	@Test
+	public void deberiaSelecionarCodigoSiguiente() throws Exception {
+		//Decalaracion
+		int docume;
+		
+		//Entrenamiento
+		mapper.insertarDocumento(doc);
+		//Ejecucion
+		docume = mapper.seleccionarCodigoMaximo();
+		//Verificacion
+		assertEquals(docume,0);
 	
 	}
 
