@@ -90,5 +90,24 @@ public abstract class BaseDocumetoMapperTest {
 		assertThat(docume,is(doc));
 	
 	}
+	
+	@Test
+	public void deberiaSelecionarTodosLosDocumentos() throws Exception {
+		//Decalaracion
+		List<Documento> documentos;
+		
+		//Entrenamiento
+		Documento doc1 = new Documento(2,"documento 2",Utilidades.asDate(LocalDate.of(2015, 2, 1)),
+				Utilidades.asDate(LocalDate.of(2015, 2, 2)),true,EstadoDocumento.ACTIVO);
+		mapper.insertarDocumento(doc);
+		mapper.insertarDocumento(doc1);
+		//Ejecucion
+		documentos = mapper.selectTodosLosDocumentos();
+		//Verificacion
+		assertEquals(documentos,hasSize(2));
+		assertThat(documentos, hasItems(this.doc,doc1));
+	
+	}
+
 
 }

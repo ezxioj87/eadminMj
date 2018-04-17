@@ -61,6 +61,12 @@
 		from ELEMENTO
 		where codigo = #{codigo};
 	</select>
+	
+	<select id="selectTodosLosDocumentos" resultMap="map">
+	SELECT	
+	codigo,nombre,fechaCreacion,fechaUltimaModificacion,esPublico,estadoDocumento,tipo
+	from ELEMENTO;
+	</select>
 
 
 </mapper>
